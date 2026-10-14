@@ -103,7 +103,8 @@
     const radiusMeters = {{ $radius }} * {{ $unit === 'mile' ? 1609.344 : 1000 }};
     const places = @json($markers);
 
-    const map = L.map('map');
+    // A view must be set before adding a metre-based circle, or Leaflet throws.
+    const map = L.map('map').setView(origin, 12);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap contributors',
