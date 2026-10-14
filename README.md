@@ -15,6 +15,4 @@ php artisan serve
 - Model: `app/Models/Place.php` (extends `Laraversine\Destination`)
 - SQLite function registration: `app/Providers/AppServiceProvider.php`
 
-`composer.json` points at a local path for the package; once the release with
-`distance()` is on Packagist, replace the `repositories` entry with
-`"freepeace13/laraversine": "^1.1"`.
+Requires `freepeace13/laraversine` ^1.1 from Packagist.

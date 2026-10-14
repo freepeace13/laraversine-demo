@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "296021a56fac7661bae125f0aa43abf0",
+    "content-hash": "4ff5806d4b9c86da0c29b891deed09a8",
     "packages": [
         {
             "name": "brick/math",
@@ -513,11 +513,17 @@
         },
         {
             "name": "freepeace13/laraversine",
-            "version": "dev-feat/distance-value-object",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/freepeace13/laraversine.git",
+                "reference": "74804759be042e8e8a3c229f7776666a5e5035ab"
+            },
             "dist": {
-                "type": "path",
-                "url": "../laraversine",
-                "reference": "705559959ed1a359bf095b5e33785c7840c6466d"
+                "type": "zip",
+                "url": "https://api.github.com/repos/freepeace13/laraversine/zipball/74804759be042e8e8a3c229f7776666a5e5035ab",
+                "reference": "74804759be042e8e8a3c229f7776666a5e5035ab",
+                "shasum": ""
             },
             "require": {
                 "illuminate/database": "^11.0|^12.0",
@@ -542,22 +548,7 @@
                     "Laraversine\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Laraversine\\Test\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "lint": [
-                    "pint"
-                ],
-                "lint:check": [
-                    "pint --test"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -591,9 +582,7 @@
                 "issues": "https://github.com/freepeace13/laraversine/issues",
                 "source": "https://github.com/freepeace13/laraversine"
             },
-            "transport-options": {
-                "relative": true
-            }
+            "time": "2026-10-14T16:33:11+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -8469,9 +8458,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "freepeace13/laraversine": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
