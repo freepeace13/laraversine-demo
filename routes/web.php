@@ -27,8 +27,16 @@ Route::get('/', function (Request $request) {
         ->nearestFirst()
         ->get();
 
+    $markers = $places->map(fn ($p) => [
+        'name' => $p->name,
+        'category' => $p->category,
+        'distance' => (string) $p->distance(),
+        'position' => [$p->latitude, $p->longitude],
+    ])->values();
+
     return view('welcome', [
         'places' => $places,
+        'markers' => $markers,
         'origins' => $origins,
         'origin' => $origin,
         'unit' => $unit,

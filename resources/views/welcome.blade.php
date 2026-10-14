@@ -101,12 +101,7 @@
 <script>
     const origin = @json($origins[$origin][1]);
     const radiusMeters = {{ $radius }} * {{ $unit === 'mile' ? 1609.344 : 1000 }};
-    const places = @json($places->map(fn ($p) => [
-        'name' => $p->name,
-        'category' => $p->category,
-        'distance' => (string) $p->distance(),
-        'position' => [$p->latitude, $p->longitude],
-    ])->values());
+    const places = @json($markers);
 
     const map = L.map('map');
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
