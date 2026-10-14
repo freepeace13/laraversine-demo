@@ -3,6 +3,8 @@
 A one-page demo of [freepeace13/laraversine](https://github.com/freepeace13/laraversine):
 pick where you are, a radius and a unit, and 24 seeded places re-sort by distance.
 
+![Laraversine demo: radius search with a Leaflet map and distance-sorted results](laraversine-demo-screenshot.png)
+
 ```bash
 composer install
 cp .env.example .env && php artisan key:generate
