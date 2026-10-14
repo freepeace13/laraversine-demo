@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laraversine demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
     <style>
         :root { --bg:#f6f7f9; --card:#fff; --ink:#15171c; --muted:#6b7280; --accent:#e5484d; --line:#e5e7eb; }
         @media (prefers-color-scheme: dark) {
@@ -34,6 +35,7 @@
         .bar { height:4px; border-radius:2px; background:var(--line); margin-top:8px; overflow:hidden; }
         .bar span { display:block; height:100%; background:var(--accent); }
         .empty { text-align:center; color:var(--muted); padding:32px; }
+        #map { height:360px; border-radius:12px; border:1px solid var(--line); margin-bottom:16px; z-index:0; }
         pre { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px;
               overflow-x:auto; font-size:13px; margin-top:24px; }
     </style>
@@ -69,6 +71,8 @@
         </div>
     </form>
 
+    <div id="map"></div>
+
     <p class="count">{{ $places->count() }} of {{ $total }} places, nearest first</p>
 
     @if ($places->isEmpty())
@@ -92,5 +96,37 @@
     ->nearestFirst()
     ->get();</pre>
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+    const origin = @json($origins[$origin][1]);
+    const radiusMeters = {{ $radius }} * {{ $unit === 'mile' ? 1609.344 : 1000 }};
+    const places = @json($places->map(fn ($p) => [
+        'name' => $p->name,
+        'category' => $p->category,
+        'distance' => (string) $p->distance(),
+        'position' => [$p->latitude, $p->longitude],
+    ])->values());
+
+    const map = L.map('map');
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+
+    const circle = L.circle(origin, {
+        radius: radiusMeters, color: '#e5484d', weight: 2, fillOpacity: 0.08,
+    }).addTo(map);
+
+    L.marker(origin).addTo(map).bindPopup('You are here');
+
+    places.forEach((p, i) => {
+        L.circleMarker(p.position, {
+            radius: 7, color: '#fff', weight: 2, fillColor: '#e5484d', fillOpacity: 1,
+        }).addTo(map).bindPopup(`<strong>${p.name}</strong><br>${p.category} &middot; ${p.distance}`);
+    });
+
+    map.fitBounds(circle.getBounds(), { padding: [16, 16] });
+</script>
 </body>
 </html>
